@@ -15,7 +15,6 @@ function createPost(){
         }),
     }).then((res) => {
         loadPosts();
-        postBody.value = "";
     });
 }
 
