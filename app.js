@@ -46,16 +46,22 @@ function query() {
 }
 
 function renderPosts(data) {
-    console.log(data);
     var postList= '';
+    
     data.forEach(post => {
-        postList += 
-            `<li class="list-group-item">
-                <span class="badge badge-secondary">${post.content.user}</span>
-                <div>
-                    <small>${post.content.postBody}</small>
-                </div>
+        getUserAvatar(post.content.user).then(avatarURL => {
+            postList += 
+            `<li class="list-group-item inline">
+                <img src="${avatarURL}" height=50/>
+                <small>${post.content.postBody}</small>
             </li>`
-        posts.innerHTML = postList;
+            posts.innerHTML = postList;
+        })
     });
+}
+
+function getUserAvatar(id) {
+    return domo.get(`/domo/users/v1/${id}?includeDetails=true`).then(data => {
+        return data.avatarKey + '?size=100';
+    })
 }
