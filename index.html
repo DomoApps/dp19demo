@@ -5,8 +5,20 @@
   </head>
   <body onload="loadPosts()">
     <h1>DomoPalooza2019 Forum</h1>
-    <ul class="list-group" id="posts">
+    <!-- Search Box -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="search-addon">Search</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search-addon" id="searchbox">
+    </div>
+    <button type="button" class="btn btn-primary" onClick="query()">Submit</button>
+
+    <!-- List of Posts -->
+    <ul class="list-group mt-20" id="posts">
     </ul>
+
+    <!-- New Post Input Box -->
     <div class="input-group mb-3 mt-20">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">New Post</span>
