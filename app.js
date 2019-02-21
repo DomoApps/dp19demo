@@ -46,7 +46,6 @@ function query() {
 }
 
 function renderPosts(data) {
-    console.log(data);
     var postList= '';
     data.forEach(post => {
         postList += 
