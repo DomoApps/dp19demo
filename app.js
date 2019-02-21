@@ -21,7 +21,6 @@ function createPost(){
 
 function loadPosts() {
     var posts = document.getElementById("posts");
-    posts.innerHTML = '';
     domo.get(`/domo/magnum/v1/collection/DP19Forum/documents`)
         .then((data) => {
             var postList= '';
