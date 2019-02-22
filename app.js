@@ -1,19 +1,15 @@
 
 function createPost(){
     var postBody = document.getElementById("postBody").value;
-    fetch(`/domo/magnum/v1/collection/DP19Forum/documents`, {
-        method: 'POST',
-        headers: {
-            "accept": 'application/json',
-            "content-type": 'application/json'
-        },
-        body: JSON.stringify({
+    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents`,
+        {
             content: {
                 user: domo.env.userId,
                 postBody: postBody
             }
-        }),
-    }).then((res) => {
+        }
+    )
+    .then((res) => {
         loadPosts();
     });
 }
@@ -34,5 +30,4 @@ function loadPosts() {
                 posts.innerHTML = postList;
             });
         })
-
 }
