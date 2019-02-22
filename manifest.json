@@ -7,16 +7,16 @@
   },
   "mapping": [],
   "collections": [
-      {
-      "name": "DP19Forum",
-        "schema": {"columns":
-          [
-            {"name": "user", "type": "STRING"},
-            {"name": "postBody", "type": "STRING"}
-          ]
-        },
-      "syncEnabled": true
-      }
-    ],
+    {
+    "name": "DP19Forum",
+      "schema": {"columns":
+        [
+          {"name": "user", "type": "STRING"},
+          {"name": "postBody", "type": "STRING"}
+        ]
+      },
+    "syncEnabled": true
+    }
+  ],
   "id": "d606a5c6-ea2b-4c92-a8ed-e83b5764004c"
 }
