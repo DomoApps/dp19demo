@@ -35,15 +35,13 @@ function query() {
 function renderPosts(data) {
     var postList= '';
     data.forEach(post => {
-        getUserAvatar(post.content.user).then(avatarURL => {
-            postList += 
+        postList += 
             `<li class="list-group-item">
                 <span class="badge badge-secondary">${post.content.user}</span>
                 <div>
                     <small>${post.content.postBody}</small>
                 </div>
             </li>`
-            posts.innerHTML = postList;
-        })
+        posts.innerHTML = postList;
     });
 }
