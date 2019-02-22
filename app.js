@@ -37,17 +37,13 @@ function renderPosts(data) {
     data.forEach(post => {
         getUserAvatar(post.content.user).then(avatarURL => {
             postList += 
-            `<li class="list-group-item inline">
-                <img src="${avatarURL}" height=50/>
-                <small>${post.content.postBody}</small>
+            `<li class="list-group-item">
+                <span class="badge badge-secondary">${post.content.user}</span>
+                <div>
+                    <small>${post.content.postBody}</small>
+                </div>
             </li>`
             posts.innerHTML = postList;
         })
     });
-}
-
-function getUserAvatar(id) {
-    return domo.get(`/domo/users/v1/${id}?includeDetails=true`).then(data => {
-        return data.avatarKey + '?size=100';
-    })
 }
