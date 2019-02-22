@@ -1,19 +1,15 @@
 
 function createPost(){
     var postBody = document.getElementById("postBody").value;
-    fetch(`/domo/magnum/v1/collection/DP19Forum/documents`, {
-        method: 'POST',
-        headers: {
-            "accept": 'application/json',
-            "content-type": 'application/json'
-        },
-        body: JSON.stringify({
+    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents`,
+        {
             content: {
                 user: domo.env.userId,
                 postBody: postBody
             }
-        }),
-    }).then((res) => {
+        }
+    )
+    .then((res) => {
         loadPosts();
     });
 }
@@ -30,24 +26,14 @@ function query() {
     var query = document.getElementById("searchbox").value !== null 
         ? document.getElementById("searchbox").value 
         : {};
-    
-    fetch(`/domo/magnum/v1/collection/DP19Forum/documents/query`, {
-        method: 'POST',
-        headers: {
-            "accept": 'application/json',
-            "content-type": 'application/json'
-        },
-        body: JSON.stringify({
-            'content.postBody': { '$regex': `${query}`, '$options': 'i' }
-        }),
-    })
-    .then(resp => resp.json())
+    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents/query`, 
+        {'content.postBody': { '$regex': `${query}`, '$options': 'i' }}
+    )
     .then(data => renderPosts(data));
 }
 
 function renderPosts(data) {
     var postList= '';
-    
     data.forEach(post => {
         getUserAvatar(post.content.user).then(avatarURL => {
             postList += 
