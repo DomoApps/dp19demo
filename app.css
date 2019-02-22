@@ -8,3 +8,8 @@ h1 {
 .mt-20 {
   margin-top: 20px;
 }
+
+.inline {
+  display: flex;
+  justify-content: start;
+}
