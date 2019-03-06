@@ -13,3 +13,7 @@ h1 {
   display: flex;
   justify-content: start;
 }
+
+.attachment {
+  font-size: 10px;
+}
