@@ -17,3 +17,7 @@ h1 {
 .attachment {
   font-size: 10px;
 }
+
+.attachmentWrapper {
+  margin: 5px;
+}

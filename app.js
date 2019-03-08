@@ -1,13 +1,42 @@
 
-function createPost(){
+function submit() {
     var postBody = document.getElementById("postBody").value;
-    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents`,
-        {
-            content: {
-                user: domo.env.userId,
-                postBody: postBody
+    var fileName = document.getElementById("attachment").value.replace(/^.*\\/, "");;
+    var file = document.getElementById("attachment").files[0];
+    if(file === undefined) {
+        createPost(
+            {
+                content: {
+                    user: domo.env.userId,
+                    postBody: postBody
+                }
             }
-        }
+        );
+    }
+    else {
+        var formData = new FormData();
+        formData.append('file',file);
+        var postOptions = { contentType: 'multipart' };
+        domo.post(`domo/data-files/v1?name=${fileName}`, formData, postOptions)
+            .then((response) => {
+                createPost(
+                    {
+                        content: {
+                            user: domo.env.userId,
+                            postBody: postBody,
+                            attachmentName: fileName,
+                            attachmentURL: `domo/data-files/v1/${response.dataFileId}`,
+                        }
+                    }
+                );
+            });
+    }
+}
+
+
+function createPost(body){
+    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents`,
+        body
     )
     .then((res) => {
         loadPosts();
@@ -37,9 +66,18 @@ function renderPosts(data) {
     data.forEach(post => {
         getUserAvatar(post.content.user).then(avatarURL => {
             postList += 
-            `<li class="list-group-item inline">
-                <img src="${avatarURL}" height=50/>
-                <small>${post.content.postBody}</small>
+            `<li class="list-group-item">
+                <div class="inline">
+                    <img src="${avatarURL}" height=50/>
+                    <small>${post.content.postBody}</small><br />
+                </div>
+                <div class="attachmentWrapper">
+                    ${post.content.attachmentURL
+                        ? `${'&#x1f4ce;'} <a href="${post.content.attachmentURL}" download>
+                            <span class="badge badge-secondary">${post.content.attachmentName}</span>
+                        </a>`
+                        : ''}
+                </div>
             </li>`
             posts.innerHTML = postList;
         })
