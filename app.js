@@ -1,4 +1,3 @@
-
 function submit() {
     var postBody = document.getElementById("postBody").value;
     var fileName = document.getElementById("attachment").value.replace(/^.*\\/, "");;
