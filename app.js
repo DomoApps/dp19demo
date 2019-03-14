@@ -1,4 +1,3 @@
-
 function createPost(){
     var postBody = document.getElementById("postBody").value;
     domo.post(`/domo/datastores/v1/collections/DP19Forum/documents`,
