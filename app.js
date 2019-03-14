@@ -35,7 +35,7 @@ function submit() {
 
 
 function createPost(body){
-    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents`,
+    domo.post(`/domo/datastores/v1/collections/DP19Forum/documents`,
         body
     )
     .then((res) => {
@@ -45,7 +45,7 @@ function createPost(body){
 
 function loadPosts() {
     var posts = document.getElementById("posts");
-    domo.get(`/domo/magnum/v1/collection/DP19Forum/documents`)
+    domo.get(`/domo/datastores/v1/collections/DP19Forum/documents`)
         .then((data) => {
             renderPosts(data);
         })
@@ -55,7 +55,7 @@ function query() {
     var query = document.getElementById("searchbox").value !== null 
         ? document.getElementById("searchbox").value 
         : {};
-    domo.post(`/domo/magnum/v1/collection/DP19Forum/documents/query`, 
+    domo.post(`/domo/datastores/v1/collections/DP19Forum/documents/query`, 
         {'content.postBody': { '$regex': `${query}`, '$options': 'i' }}
     )
     .then(data => renderPosts(data));
